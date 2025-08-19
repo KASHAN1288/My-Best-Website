@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Legendary English to Urdu Translator</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            background: linear-gradient(45deg, #141E30, #243B55);
+            color: white;
+            padding: 50px;
+        }
+        h2 {
+            font-size: 30px;
+            margin-bottom: 20px;
+        }
+        input, button {
+            font-size: 18px;
+            padding: 10px;
+            margin: 10px;
+            border-radius: 5px;
+        }
+        input {
+            width: 80%;
+            border: 2px solid #fff;
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+        button {
+            background: #1E88E5;
+            color: white;
+            border: none;
+            cursor: pointer;
+        }
+        button:hover {
+            background: #1565C0;
+        }
+        #translatedText {
+            font-size: 22px;
+            margin-top: 20px;
+        }
+    </style>
+    <script>
+        async function translateText() {
+            let text = document.getElementById("englishText").value;
+            let url = `https://translate.googleapis.com/translate_a/single?client=gtx&sl=en&tl=ur&dt=t&q=${encodeURIComponent(text)}`;
+            
+            try {
+                let response = await fetch(url);
+                let result = await response.json();
+                document.getElementById("translatedText").innerText = result[0][0][0];
+            } catch (error) {
+                document.getElementById("translatedText").innerText = "Translation failed!";
+            }
+        }
+    </script>
+</head>
+<body>
+    <h2>🌟 Legendary English to Urdu Translator 🌟</h2>
+    <input type="text" id="englishText" placeholder="Enter English text here">
+    <button onclick="translateText()">Translate</button>
+    <p><strong>Urdu Translation:</strong> <span id="translatedText"></span></p>
+</body>
+</html>
